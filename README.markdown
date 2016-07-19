@@ -9,9 +9,15 @@ these trees it became necessary to generate the actual
 graphs, and this software does just that. It generates dot
 files to be read by the graphviz software. Additionally it
 calculates the total number of nodes, how tall the tree is,
-and how many branches it contains. (In its current iteration
-it is not rendering the dot files that should be readded 
-shortly)
+and how many branches it contains. 
 
 The algorithm used was discovered [in this paper](https://arxiv.org/abs/1105.2147)
 by V. Blanco and J.C. Rosales.
+
+The current software is incomplete (I managed to delete our
+old code base through a careless rm -rf) features it will 
+have re-added shortly:
+* dot file rendering
+* output of data in csv and latex table formats
+* multithreaded graph generation
+
