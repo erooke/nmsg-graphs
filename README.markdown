@@ -20,4 +20,4 @@ have re-added shortly:
 * dot file rendering
 * output of data in csv and latex table formats
 * multithreaded graph generation
-
+* comments which explain what is going on
