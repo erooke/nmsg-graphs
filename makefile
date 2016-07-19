@@ -17,3 +17,5 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.cpp
 
 clean:
 	$(RM) -r $(BUILDDIR) $(TARGET)
+
+.PHONY: clean
