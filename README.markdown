@@ -15,8 +15,8 @@ The algorithm used was discovered [in this paper](https://arxiv.org/abs/1105.214
 by V. Blanco and J.C. Rosales.
 
 The current software is incomplete (I managed to delete our
-old code base through a careless rm -rf) features it will 
-have re-added shortly:
+old code base through a careless rm -rf) features it will have  
+re-added shortly:
 * dot file rendering
 * output of data in csv and latex table formats
 * multithreaded graph generation
