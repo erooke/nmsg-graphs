@@ -4,6 +4,8 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <sstream>
+#include <string>
 
 class Node
 {
@@ -16,6 +18,8 @@ class Node
         unsigned long long level;
         
         void buildTree();
+
+        std::string csvLine(), texLine(), dotLine();
         
         static unsigned long long getLevels(), getBranches(), getCount();
         

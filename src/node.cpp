@@ -120,3 +120,31 @@ unsigned long long Node::getCount()
 {
     return Node::count;
 }
+
+std::string Node::csvLine()
+{
+    std::ostringstream result;
+    result << f << "," 
+           << getLevels()   << "," 
+           << getBranches() << "," 
+           << getCount()    << std::endl;
+    
+    return result.str();
+}
+        
+std::string Node::texLine()
+{ 
+    std::ostringstream result;
+    result << f << " & "
+           << getLevels()   << " & "
+           << getBranches() << " & "
+           << getCount()    << "\\\\" 
+           << std::endl;
+    
+    return result.str();
+}
+        
+std::string Node::dotLine()
+{
+    return "not implemented yet";
+}
