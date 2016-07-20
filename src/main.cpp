@@ -31,6 +31,9 @@ Node C(int a){
 int main(int argc, char *argv[]){
 
     int frobenius;
+    bool tex = false, 
+         csv = false;
+
 
     for(int i = 1; i < argc; ++i){
         if(strcmp(argv[i],"-f") == 0)
@@ -42,6 +45,27 @@ int main(int argc, char *argv[]){
             }
             frobenius = atoi(argv[i]);    
         }
+        else if(strcmp(argv[i],"-d") == 0)
+        {
+            if(++i >= argc)
+            {
+                cout << "Usage: -d [format (tex/csv)]\n";
+                return 1;
+            }
+            else if(strcmp(argv[i], "tex") == 0)
+            {
+                tex = true;
+            }
+            else if(strcmp(argv[i], "csv") == 0)
+            {
+                csv = true;
+            }
+            else
+            {
+                cout << "Usage: -d [format (tex/csv)]\n";
+                return 1;
+            }
+        }
 		else{
 			cout <<"Unknown option " << argv[i] << "\n";
             return 1;
@@ -52,8 +76,15 @@ int main(int argc, char *argv[]){
 
     top = C(frobenius);
     top.buildTree();
-    cout << "Levels: " << Node::getLevels() << std::endl
-         << "Nodes: " << Node::getCount() << std::endl
-         << "Branches: " << Node::getBranches() << std::endl;
+
+    if(csv)
+    {
+        cout << top.csvLine();
+    }
+    else if(tex)
+    {
+        cout << top.texLine();
+    }
+
     return 0;
 }
