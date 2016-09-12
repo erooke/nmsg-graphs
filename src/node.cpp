@@ -4,6 +4,7 @@
 unsigned long long Node::count    = 1;
 unsigned long long Node::levels   = 0;
 unsigned long long Node::branches = 0;
+bool Node::draw                   = false;
 
 void Node::spawnChild(int k)
 {
@@ -21,6 +22,7 @@ void Node::spawnChild(int k)
     
     //Increment the necessary counters
     incrementCount();     
+    children.at(k).id = count;
     children.at(k).level = level+1;
 }
  
@@ -43,12 +45,13 @@ void Node::calcGenerators()
 	while(!semigroup[multiplicity]){      
 		multiplicity++;
 	}
-	generators.reserve(f+multiplicity+1);
-
+	generators.resize(f+multiplicity+1);
+    
     // Copy memory from one array to the other
 	for(int i = 0; i < f+1; i++){
 		generators[i]=semigroup[i];
 	}
+    
 	for(int i = f+1; i < f+multiplicity+1; i++){
 		generators[i]=true;
 	}
@@ -128,6 +131,8 @@ std::string Node::csvLine()
            << getLevels()   << "," 
            << getBranches() << "," 
            << getCount()    << std::endl;
+
+    result << generator() << std::endl;
     
     return result.str();
 }
@@ -142,9 +147,26 @@ std::string Node::texLine()
            << std::endl;
     
     return result.str();
-}
-        
-std::string Node::dotLine()
+} 
+
+//std::string Node::dotLine()
+//{
+    //std::string parentGenerator = generator();    
+//}
+
+std::string Node::generator()
 {
-    return "not implemented yet";
+    std::ostringstream result;
+    result << "<";
+    std::string sep = "";
+    
+    for (int i = 0; i < generators.size(); i++){
+        if(generators[i])
+        {
+            result << sep << i;
+            sep = ",";
+        }
+    }
+    result << ">";
+    return result.str();
 }

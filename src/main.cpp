@@ -25,31 +25,44 @@ Node C(int a){
     }
     n.level = 0;
     n.f = a;
+    n.id = 0;
     return n;
 }
 
 int main(int argc, char *argv[]){
 
     int frobenius;
-    bool tex = false, 
-         csv = false;
 
+    std::string usage = "";
+
+    bool tex   = false, 
+         csv   = false,
+         graph = false;
+
+    if(argc < 2)
+    {
+        usage = "Usage: -f [frobenius number]";
+        cout << usage << std::endl;
+        return 1;
+    } 
 
     for(int i = 1; i < argc; ++i){
         if(strcmp(argv[i],"-f") == 0)
         {
+            usage = "Usage: -f [frobenius number]";
             if(++i >= argc)
             {
-                cout << "Usage: -f [frobenius number]\n";
+                cout << usage << std::endl;
                 return 1;
             }
             frobenius = atoi(argv[i]);    
         }
         else if(strcmp(argv[i],"-d") == 0)
         {
+            usage = "Usage: -d [format (tex/csv)]" ;
             if(++i >= argc)
             {
-                cout << "Usage: -d [format (tex/csv)]\n";
+                cout << usage << std::endl;
                 return 1;
             }
             else if(strcmp(argv[i], "tex") == 0)
@@ -62,19 +75,25 @@ int main(int argc, char *argv[]){
             }
             else
             {
-                cout << "Usage: -d [format (tex/csv)]\n";
+                cout << usage << std::endl;
                 return 1;
             }
         }
-		else{
-			cout <<"Unknown option " << argv[i] << "\n";
+        else if(strcmp(argv[i],"-g") == 0)
+        {
+           graph = true; 
+        }
+		else
+        {
+			cout <<"Unknown option " << argv[i] << std::endl;
             return 1;
 		}
     }
 
 	Node top;
 
-    top = C(frobenius);
+    top = C(frobenius); 
+    Node::draw = graph;
     top.buildTree();
 
     if(csv)
